@@ -49,7 +49,7 @@ class Weather {
             // Add more country-city mappings as needed
         };
 
-        this.location = this.processLocation(setupConfig.city || "Bangkok");
+        this.location = this.processLocation(setupConfig.city || "Pattaya");
         this.updateDelay = (setupConfig.delay || 5) * 60000;
         this.stop = 0;
         this.timezone = "Asia/Bangkok";
@@ -116,7 +116,6 @@ class Weather {
             this.pm2_5 = data.current.air_quality.pm2_5;
             this.condition = data.current.condition?.text;
 
-            // Format time for display
             const formattedTime = moment.tz(this.localtime, this.timezone).format('YYYY-MM-DD HH:mm:ss');
             console.log(`[+] Weather updated for ${this.city}, ${this.country} | ${this.temp_c}°C | Local time: ${formattedTime}`);
             
@@ -397,6 +396,11 @@ class ModClient extends DiscordClient {
             'emoji:random': randomEmoji,
             'emoji:time': timeEmoji,
             'emoji:clock': clockEmoji,
+            'en=month:1': utcTime.format('M'),    
+            'en=month:2': utcTime.format('MMM'),  
+            'en=month:3': utcTime.format('MMMM'), 
+            'en-year:1': utcTime.format('YY'),    
+            'en-year:2': utcTime.format('YYYY'),  
         };
 
         input = this.replaceVariables(input, variables);
